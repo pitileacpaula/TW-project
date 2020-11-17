@@ -90,7 +90,6 @@ export default function ProminentAppBar() {
         <TextField  id="filled-search" label=" Departure" type="search" variant="filled" />
         <TextField  id="filled-search" label=" Arrival" type="search" variant="filled" />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      
         <KeyboardDatePicker
           disableToolbar
           variant="inline"
@@ -104,7 +103,6 @@ export default function ProminentAppBar() {
             'aria-label': 'change date',
           }}
         > </KeyboardDatePicker>
-         
     </MuiPickersUtilsProvider>
         </Typography>
        
