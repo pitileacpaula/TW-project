@@ -10,6 +10,16 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline'; 
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import 'date-fns';
+
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 
 
 
@@ -45,7 +55,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProminentAppBar() {
   const classes = useStyles();
-
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -76,10 +89,28 @@ export default function ProminentAppBar() {
         <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '200px', height: '25vh' }}  >
         <TextField  id="filled-search" label=" Departure" type="search" variant="filled" />
         <TextField  id="filled-search" label=" Arrival" type="search" variant="filled" />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        > </KeyboardDatePicker>
+         
+    </MuiPickersUtilsProvider>
         </Typography>
-        
+       
         </form>
       </Container>
     </div>
   );
+
 }
