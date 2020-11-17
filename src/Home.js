@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProminentAppBar() {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -86,7 +86,8 @@ export default function ProminentAppBar() {
       <Container fixed className = {classes.container}>
         
         <form className = {classes.cautare}>
-        <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '200px', height: '25vh' }}  >
+        <h1> Search for trains </h1>
+        <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '25vh', position:'relative' }}  >
         <TextField  id="filled-search" label=" Departure" type="search" variant="filled" />
         <TextField  id="filled-search" label=" Arrival" type="search" variant="filled" />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -96,14 +97,16 @@ export default function ProminentAppBar() {
           format="MM/dd/yyyy"
           margin="normal"
           id="date-picker-inline"
-          label="Date picker inline"
+          label="Departure date"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             'aria-label': 'change date',
-          }}
-        > </KeyboardDatePicker>
-    </MuiPickersUtilsProvider>
+          }}/>
+        </MuiPickersUtilsProvider>
+        <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', top:'50%', position:'relative', top:'20%', left:'5%'}}>
+        Search
+        </Typography>
         </Typography>
        
         </form>
