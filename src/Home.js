@@ -12,6 +12,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import 'date-fns';
+import 'ol/ol.css';
+import Map from 'ol/Map';
+import OSM from 'ol/source/OSM';
+import TileLayer from 'ol/layer/Tile';
+import View from 'ol/View';
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -19,9 +24,6 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,31 +87,52 @@ export default function ProminentAppBar() {
       <CssBaseline />
       <Container fixed className = {classes.container}>
         
-        <form className = {classes.cautare}>
-        <h1> Search for trains </h1>
-        <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '25vh', position:'relative' }}  >
-        <TextField  id="filled-search" label=" Departure" type="search" variant="filled" />
-        <TextField  id="filled-search" label=" Arrival" type="search" variant="filled" />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Departure date"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}/>
-        </MuiPickersUtilsProvider>
-        <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', top:'50%', position:'relative', top:'20%', left:'5%'}}>
-        Search
+
+        <Typography component="div" style={{ position:'relative' }}>
+            <form className = {classes.cautare}>
+            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '25vh', position:'relative' }}  >
+                <Typography component="h1" style={{ top:'10%', fontWeight:'bold', fontSize:'30px'}}>Search for trains </Typography>
+                <TextField  id="filled-search" label=" Departure" type="search" variant="filled" />
+                <TextField  id="filled-search" label=" Arrival" type="search" variant="filled" />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                     disableToolbar
+                     variant="inline"
+                     format="MM/dd/yyyy"
+                     margin="normal"
+                     id="date-picker-inline"
+                     label="Departure date"
+                     value={selectedDate}
+                     onChange={handleDateChange}
+                     KeyboardButtonProps={{
+                     'aria-label': 'change date',
+                     }}/>
+                </MuiPickersUtilsProvider>
+                <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', position:'relative', top:'20%', left:'5%'}}>
+                Search
+                </Typography>
+            </Typography>
+            </form>
+            <form className = {classes.cautare}>
+            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '60px', height: '25vh', position:'relative' }}  >
+                <Typography component="h1" style={{ fontWeight:'bold', fontSize:'30px', position:'relative'}}> Get information for train in transit </Typography>
+                <TextField  id="filled-search" label=" Train id" type="search" variant="filled" />
+                <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', top:'20%', position:'relative', left:'5%'}}>
+                Search
+                </Typography>
+            </Typography>
+            </form>
+            <form className = {classes.cautare}>
+            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '90px', position:'relative' }}  >
+                <Typography component="h1" style={{ fontWeight:'bold', fontSize:'30px', position:'relative'}}> See train route </Typography>
+                <TextField  id="filled-search" label=" Train id" type="search" variant="filled" />
+                <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', position:'relative', top:'20%', left:'5%'}}>
+                Search
+                </Typography>
+            </Typography>
+            </form>
+
         </Typography>
-        </Typography>
-       
-        </form>
       </Container>
     </div>
   );
