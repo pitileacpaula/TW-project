@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,11 +12,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import 'date-fns';
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import OSM from 'ol/source/OSM';
-import TileLayer from 'ol/layer/Tile';
-import View from 'ol/View';
+
+import React, { useState } from 'react';
+import Map from "./map";
+import { Layers, TileLayer, VectorLayer } from "./layers";
+import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+import { osm, vector } from "./source";
+import { fromLonLat, get } from 'ol/proj';
+import GeoJSON from 'ol/format/GeoJSON';
+import { Controls, FullScreenControl } from "./controls";
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -55,12 +59,158 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+//Map definitions
+
+let styles = {
+  'MultiPolygon': new Style({
+    stroke: new Stroke({
+      color: 'blue',
+      width: 1,
+    }),
+    fill: new Fill({
+      color: 'rgba(0, 0, 255, 0.1)',
+    }),
+  }),
+};
+const geojsonObject = {
+                      	"type": "FeatureCollection",
+                      	"features": [
+                      		{
+                      			"type": "Feature",
+                      			"properties": {
+                      				"kind": "county",
+                      				"name": "Wyandotte",
+                      				"state": "KS"
+                      			},
+                      			"geometry": {
+                      				"type": "MultiPolygon",
+                      				"coordinates": [
+                      					[
+                      						[
+                      							[
+                      								-94.8627,
+                      								39.202
+                      							],
+                      							[
+                      								-94.901,
+                      								39.202
+                      							],
+                      							[
+                      								-94.9065,
+                      								38.9884
+                      							],
+                      							[
+                      								-94.8682,
+                      								39.0596
+                      							],
+                      							[
+                      								-94.6053,
+                      								39.0432
+                      							],
+                      							[
+                      								-94.6053,
+                      								39.1144
+                      							],
+                      							[
+                      								-94.5998,
+                      								39.1582
+                      							],
+                      							[
+                      								-94.7422,
+                      								39.1691
+                      							],
+                      							[
+                      								-94.7751,
+                      								39.202
+                      							],
+                      							[
+                      								-94.8627,
+                      								39.202
+                      							]
+                      						]
+                      					]
+                      				]
+                      			}
+                      		}
+                      	]
+                      };
+const geojsonObject2 = {
+                       	"type": "FeatureCollection",
+                       	"features": [
+                       		{
+                       			"type": "Feature",
+                       			"properties": {
+                       				"kind": "county",
+                       				"name": "Johnson",
+                       				"state": "KS"
+                       			},
+                       			"geometry": {
+                       				"type": "MultiPolygon",
+                       				"coordinates": [
+                       					[
+                       						[
+                       							[
+                       								-94.9065,
+                       								38.9884
+                       							],
+                       							[
+                       								-95.0544,
+                       								38.9829
+                       							],
+                       							[
+                       								-95.0544,
+                       								38.7365
+                       							],
+                       							[
+                       								-94.9668,
+                       								38.7365
+                       							],
+                       							[
+                       								-94.6108,
+                       								38.7365
+                       							],
+                       							[
+                       								-94.6108,
+                       								38.846
+                       							],
+                       							[
+                       								-94.6053,
+                       								39.0432
+                       							],
+                       							[
+                       								-94.8682,
+                       								39.0596
+                       							],
+                       							[
+                       								-94.9065,
+                       								38.9884
+                       							]
+                       						]
+                       					]
+                       				]
+                       			}
+                       		}
+                       	]
+                       };
+const App = () => {
+  const [center, setCenter] = useState([-94.9065, 38.9884]);
+  const [zoom, setZoom] = useState(9);
+  const [showLayer1, setShowLayer1] = useState(true);
+  const [showLayer2, setShowLayer2] = useState(true);
+  }
+
+//End map definitions
+
 export default function ProminentAppBar() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+  const [center, setCenter] = useState([-94.9065, 38.9884]);
+    const [zoom, setZoom] = useState(9);
+    const [showLayer1, setShowLayer1] = useState(true);
+    const [showLayer2, setShowLayer2] = useState(true);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -131,10 +281,46 @@ export default function ProminentAppBar() {
                 </Typography>
             </Typography>
             </form>
-
+            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '90px', position:'relative' }}  >
+                <Map center={fromLonLat(center)} zoom={zoom}>
+                  <Layers>
+                    <TileLayer
+                      source={osm()}
+                      zIndex={0}
+                    />
+                    {showLayer1 && (
+                      <VectorLayer
+                        source={vector({ features: new GeoJSON().readFeatures(geojsonObject, { featureProjection: get('EPSG:3857') }) })}
+                        style={styles.MultiPolygon}
+                      />
+                    )}
+                    {showLayer2 && (
+                      <VectorLayer
+                        source={vector({ features: new GeoJSON().readFeatures(geojsonObject2, { featureProjection: get('EPSG:3857') }) })}
+                        style={styles.MultiPolygon}
+                      />
+                    )}
+                  </Layers>
+                  <Controls>
+                    <FullScreenControl />
+                  </Controls>
+                </Map>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={showLayer1}
+                    onChange={event => setShowLayer1(event.target.checked)}
+                  /> Johnson County
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={showLayer2}
+                    onChange={event => setShowLayer2(event.target.checked)}
+                  /> Wyandotte County</div>
+                </Typography>
         </Typography>
       </Container>
     </div>
   );
-
 }
