@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import 'date-fns';
 
+//Import all map related components
 import React, { useState } from 'react';
 import Map from "./map_components";
 import { Layers, TileLayer, VectorLayer } from "./map_components";
@@ -22,6 +23,7 @@ import { fromLonLat, get } from 'ol/proj';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Controls, FullScreenControl } from "./map_components";
 
+//Import date picker components
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -201,16 +203,21 @@ const App = () => {
 
 //End map definitions
 
+//Default function that generates the home page
 export default function ProminentAppBar() {
   const classes = useStyles();
+  //Set default date picker date to be the current day
   const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
+  //Handle the date change event
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+  //Set default values for map
   const [center, setCenter] = useState([25.20, 	45.94]);
     const [zoom, setZoom] = useState(6.8);
     const [showLayer1, setShowLayer1] = useState(true);
     const [showLayer2, setShowLayer2] = useState(true);
+  //Return the page
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -237,8 +244,9 @@ export default function ProminentAppBar() {
       <CssBaseline />
       <Container fixed className = {classes.container}>
         
-
+      {/*div that contains all components*/}
         <Typography component="div" style={{ position:'relative' }}>
+            {/*The form that handles the search by Departure, Arrival and date*/}
             <form className = {classes.cautare}>
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '25vh', position:'relative' }}  >
                 <Typography component="h1" style={{ top:'10%', fontWeight:'bold', fontSize:'30px'}}>Search for trains </Typography>
@@ -263,6 +271,8 @@ export default function ProminentAppBar() {
                 </Typography>
             </Typography>
             </form>
+
+            {/*The form that handles the search by train id*/}
             <form className = {classes.cautare}>
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '60px', height: '25vh', position:'relative' }}  >
                 <Typography component="h1" style={{ fontWeight:'bold', fontSize:'30px', position:'relative'}}> Get information for train in transit </Typography>
@@ -272,6 +282,8 @@ export default function ProminentAppBar() {
                 </Typography>
             </Typography>
             </form>
+
+            {/*The form that handles the map display of train routes*/}
             <form className = {classes.cautare}>
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '90px', position:'relative' }}  >
                 <Typography component="h1" style={{ fontWeight:'bold', fontSize:'30px', position:'relative'}}> See train route </Typography>
@@ -281,6 +293,8 @@ export default function ProminentAppBar() {
                 </Typography>
             </Typography>
             </form>
+
+            {/*div that contains the map*/}
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '90px', position:'relative' }}  >
                 <Map center={fromLonLat(center)} zoom={zoom}>
                   <Layers>
