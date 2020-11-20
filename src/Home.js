@@ -14,13 +14,13 @@ import Grid from '@material-ui/core/Grid';
 import 'date-fns';
 
 import React, { useState } from 'react';
-import Map from "./map";
-import { Layers, TileLayer, VectorLayer } from "./layers";
+import Map from "./map_components";
+import { Layers, TileLayer, VectorLayer } from "./map_components";
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
-import { osm, vector } from "./source";
+import { osm, vector } from "./map_components";
 import { fromLonLat, get } from 'ol/proj';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Controls, FullScreenControl } from "./controls";
+import { Controls, FullScreenControl } from "./map_components";
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
