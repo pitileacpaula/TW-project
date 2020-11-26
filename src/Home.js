@@ -74,6 +74,7 @@ let styles = {
     }),
   }),
 };
+//Object for showing routes *right now just as an example so I don't forget the structure*
 const geojsonObject = {
                       	"type": "FeatureCollection",
                       	"features": [
@@ -85,115 +86,34 @@ const geojsonObject = {
                       				"state": "KS"
                       			},
                       			"geometry": {
-                      				"type": "MultiPolygon",
-                      				"coordinates": [
-                      					[
+                      				"type": "MultiLineString",
+                      				"coordinates":
+                      				[
+                      				    [
+                      				        [
+                      						    21.21,
+                      						    45.75
+                      						],
                       						[
-                      							[
-                      								-94.8627,
-                      								39.202
-                      							],
-                      							[
-                      								-94.901,
-                      								39.202
-                      							],
-                      							[
-                      								-94.9065,
-                      								38.9884
-                      							],
-                      							[
-                      								-94.8682,
-                      								39.0596
-                      							],
-                      							[
-                      								-94.6053,
-                      								39.0432
-                      							],
-                      							[
-                      								-94.6053,
-                      								39.1144
-                      							],
-                      							[
-                      								-94.5998,
-                      								39.1582
-                      							],
-                      							[
-                      								-94.7422,
-                      								39.1691
-                      							],
-                      							[
-                      								-94.7751,
-                      								39.202
-                      							],
-                      							[
-                      								-94.8627,
-                      								39.202
-                      							]
+                      						    21.33,
+                      						    46.19
                       						]
-                      					]
+                      				    ],
+                      				    [
+                      				        [
+                                                21.33,
+                                                46.19
+                                            ],
+                                            [
+                                                21.96,
+                                                47.04
+                                            ]
+                      				    ]
                       				]
                       			}
                       		}
                       	]
                       };
-const geojsonObject2 = {
-                       	"type": "FeatureCollection",
-                       	"features": [
-                       		{
-                       			"type": "Feature",
-                       			"properties": {
-                       				"kind": "county",
-                       				"name": "Johnson",
-                       				"state": "KS"
-                       			},
-                       			"geometry": {
-                       				"type": "MultiPolygon",
-                       				"coordinates": [
-                       					[
-                       						[
-                       							[
-                       								-94.9065,
-                       								38.9884
-                       							],
-                       							[
-                       								-95.0544,
-                       								38.9829
-                       							],
-                       							[
-                       								-95.0544,
-                       								38.7365
-                       							],
-                       							[
-                       								-94.9668,
-                       								38.7365
-                       							],
-                       							[
-                       								-94.6108,
-                       								38.7365
-                       							],
-                       							[
-                       								-94.6108,
-                       								38.846
-                       							],
-                       							[
-                       								-94.6053,
-                       								39.0432
-                       							],
-                       							[
-                       								-94.8682,
-                       								39.0596
-                       							],
-                       							[
-                       								-94.9065,
-                       								38.9884
-                       							]
-                       						]
-                       					]
-                       				]
-                       			}
-                       		}
-                       	]
-                       };
 const App = () => {
   const [center, setCenter] = useState([-94.9065, 38.9884]);
   const [zoom, setZoom] = useState(9);
@@ -301,6 +221,10 @@ export default function ProminentAppBar() {
                     <TileLayer
                       source={osm()}
                       zIndex={0}
+                    />
+                    <VectorLayer
+                     source={vector({ features: new GeoJSON().readFeatures(geojsonObject, { featureProjection: get('EPSG:3857') }) })}
+                     style={styles.MultiPolygon}
                     />
                   </Layers>
                   <Controls>
