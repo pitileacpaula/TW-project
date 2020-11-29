@@ -64,10 +64,10 @@ const useStyles = makeStyles((theme) => ({
 //Map definitions
 
 let styles = {
-  'MultiPolygon': new Style({
+  'MultiLineString': new Style({
     stroke: new Stroke({
       color: 'blue',
-      width: 1,
+      width: 3,
     }),
     fill: new Fill({
       color: 'rgba(0, 0, 255, 0.1)',
@@ -81,9 +81,9 @@ const geojsonObject = {
                       		{
                       			"type": "Feature",
                       			"properties": {
-                      				"kind": "county",
-                      				"name": "Wyandotte",
-                      				"state": "KS"
+                      				"kind": "route",
+                      				"from": "Timisoara",
+                      				"to": "Oradea"
                       			},
                       			"geometry": {
                       				"type": "MultiLineString",
@@ -224,7 +224,7 @@ export default function ProminentAppBar() {
                     />
                     <VectorLayer
                      source={vector({ features: new GeoJSON().readFeatures(geojsonObject, { featureProjection: get('EPSG:3857') }) })}
-                     style={styles.MultiPolygon}
+                     style={styles.MultiLineString}
                     />
                   </Layers>
                   <Controls>
