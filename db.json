@@ -1,0 +1,34 @@
+{
+  "trains" : [
+    {
+      "id" : 1,
+      "departure":"Timisoara",
+    "arrival":"Arad",
+    "date":"02.12.2020"
+    },
+    { "id": 2,
+      "departure":"Lugoj",
+      "arrival":"Arad",
+      "date":"02.12.2020"
+    },
+    {
+      "id" : 3,
+      "departure" : "Arad",
+      "arrival" : "Bucuresti",
+      "date" : "18.12.2020"
+    },
+    {
+      "id" : 4,
+      "departure" : "Arad",
+      "arrival" : "Timisoara",
+      "date" : "18.12.2020"
+    },
+    {
+      "id" : 5,
+      "departure" : "Bucuresti",
+      "arrival" : "Arad",
+      "date" : "18.12.2020"
+    }
+  ]
+  
+}
