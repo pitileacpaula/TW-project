@@ -29,21 +29,14 @@ export class SearchBar extends Component {
              value={this.props.arrival}
              onChange={this.handleOnChange}
              placeholder='arrival..' />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                     disableToolbar
-                     variant="inline"
-                     format="MM/dd/yyyy"
-                     margin="normal"
-                     id="date-picker-inline"
-                     name="date"
-                     value={this.props.date}
-                     onChange={this.handleOnChange}
-                     
-                     KeyboardButtonProps={{
-                     'aria-label': 'change date',
-                     }}/>
-                </MuiPickersUtilsProvider>
+             <TextField id="filled-search"
+             name="date"
+             type="text"
+             variant="filled"
+             onChange={this.handleOnChange}
+             value={this.props.date}
+             placeholder="DD/MM/YYYY" />
+        
         
       </form>
       )  

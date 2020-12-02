@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import 'date-fns';
 
+import SearchApp from './SearchComponents/SearchApp'
 //Import all map related components
 import React, { useState } from 'react';
 import Map from "./map_components";
@@ -114,7 +115,7 @@ const geojsonObject = {
                       		}
                       	]
                       };
-const App = () => {
+const Appp = () => {
   const [center, setCenter] = useState([-94.9065, 38.9884]);
   const [zoom, setZoom] = useState(9);
   const [showLayer1, setShowLayer1] = useState(true);
@@ -151,7 +152,7 @@ export default function ProminentAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h5" noWrap>
-            Material-UI
+            Info-TREN
           </Typography>
           <IconButton aria-label="search" color="inherit">
             <SearchIcon />
@@ -162,36 +163,21 @@ export default function ProminentAppBar() {
         </Toolbar>
       </AppBar>
       <CssBaseline />
+      
       <Container fixed className = {classes.container}>
-        
-      {/*div that contains all components*/}
-        <Typography component="div" style={{ position:'relative' }}>
+
             {/*The form that handles the search by Departure, Arrival and date*/}
             <form className = {classes.cautare}>
-            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '25vh', position:'relative' }}  >
+            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '80vh', position:'relative' }}  >
                 <Typography component="h1" style={{ top:'10%', fontWeight:'bold', fontSize:'30px'}}>Search for trains </Typography>
-                <TextField  id="filled-search" label=" Departure" type="search" variant="filled" />
-                <TextField  id="filled-search" label=" Arrival" type="search" variant="filled" />
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                     disableToolbar
-                     variant="inline"
-                     format="MM/dd/yyyy"
-                     margin="normal"
-                     id="date-picker-inline"
-                     label="Departure date"
-                     value={selectedDate}
-                     onChange={handleDateChange}
-                     KeyboardButtonProps={{
-                     'aria-label': 'change date',
-                     }}/>
-                </MuiPickersUtilsProvider>
-                <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', position:'relative', top:'20%', left:'5%'}}>
-                Search
-                </Typography>
+                
+                <SearchApp/>
+               
             </Typography>
+            
             </form>
-
+            </Container>
+<Container fixed className = {classes.container}>
             {/*The form that handles the search by train id*/}
             <form className = {classes.cautare}>
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '60px', height: '25vh', position:'relative' }}  >
@@ -202,7 +188,8 @@ export default function ProminentAppBar() {
                 </Typography>
             </Typography>
             </form>
-
+            </Container>
+            <Container fixed className = {classes.container}>
             {/*The form that handles the map display of train routes*/}
             <form className = {classes.cautare}>
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '90px', position:'relative' }}  >
@@ -213,7 +200,8 @@ export default function ProminentAppBar() {
                 </Typography>
             </Typography>
             </form>
-
+            </Container>
+            <Container fixed className = {classes.container}>
             {/*div that contains the map*/}
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '90px', position:'relative' }}  >
                 <Map center={fromLonLat(center)} zoom={zoom}>
@@ -232,7 +220,7 @@ export default function ProminentAppBar() {
                   </Controls>
                 </Map>
                 </Typography>
-        </Typography>
+        
       </Container>
     </div>
   );
