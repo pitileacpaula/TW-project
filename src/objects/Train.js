@@ -1,3 +1,5 @@
-var id;
-var hourLeaving;
-var hourArrival;
+/*
+class Train
+{
+    constructor(id,)
+}*/
