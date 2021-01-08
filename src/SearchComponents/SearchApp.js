@@ -5,7 +5,6 @@ import SearchBar from './SearchBar'
 import TableBody  from './TableBody'
 
 
-
 export class SearchApp extends Component {
   constructor(props) {
     super(props);

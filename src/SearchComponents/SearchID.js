@@ -16,7 +16,6 @@ class SearchArrival extends React.Component {
     render()
     {
         const trains = db.trains;
-
         let libData=[];  
         const searchKey= this.state.search.trim().toLowerCase();
 
