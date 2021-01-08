@@ -13,7 +13,9 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import 'date-fns';
 
+
 import SearchApp from './SearchComponents/SearchApp'
+import SearchID from './SearchComponents/SearchID'
 //Import all map related components
 import React, { useState } from 'react';
 import Map from "./map_components";
@@ -180,12 +182,9 @@ export default function ProminentAppBar() {
 <Container fixed className = {classes.container}>
             {/*The form that handles the search by train id*/}
             <form className = {classes.cautare}>
-            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '60px', height: '25vh', position:'relative' }}  >
+            <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '60px', height: '50vh', position:'relative' }}  >
                 <Typography component="h1" style={{ fontWeight:'bold', fontSize:'30px', position:'relative'}}> Get information for train in transit </Typography>
-                <TextField  id="filled-search" label=" Train id" type="search" variant="filled" />
-                <Typography component="button" style={{ backgroundColor: '#D6DBDF ', height: '5vh', width:'10vh', top:'20%', position:'relative', left:'5%'}}>
-                Search
-                </Typography>
+                <SearchID/>
             </Typography>
             </form>
             </Container>

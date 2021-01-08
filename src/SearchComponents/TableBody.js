@@ -21,7 +21,7 @@ function createData(departure, arrival, date) {
 
 
 
- class TableBody extends Component {
+ class TableTrains extends Component {
   
 
   render() {
@@ -52,4 +52,4 @@ function createData(departure, arrival, date) {
   );
 }
 }
-export default TABELNOU;
+export default TableTrains;

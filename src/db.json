@@ -4,36 +4,48 @@
       "id" : 1,
       "departure":"Timisoara",
     "arrival":"Arad",
-    "date":"02/12/2020"
+    "date":"02/12/2020",
+    "trainId" : "ID001",
+    "inTransit" : false
     },
     { "id": 2,
       "departure":"Lugoj",
       "arrival":"Arad",
-      "date":"02/12/2020"
+      "date":"02/12/2020",
+      "trainId" : "ID002",
+      "inTransit" : false
     },
     {
       "id" : 3,
       "departure" : "Arad",
       "arrival" : "Bucuresti",
-      "date" : "18/12/2020"
+      "date" : "18/12/2020",
+      "trainId" : "ID003",
+      "inTransit" : true
     },
     {
       "id" : 4,
       "departure" : "Arad",
       "arrival" : "Timisoara",
-      "date" : "18/12/2020"
+      "date" : "18/12/2020",
+      "trainId" : "ID004",
+      "inTransit" : true
     },
     {
       "id" : 5,
       "departure" : "Bucuresti",
       "arrival" : "Arad",
-      "date" : "18/12/2020"
+      "date" : "18/12/2020",
+      "trainId" : "ID005", 
+      "inTransit" : false
     },
     {
       "id" : 6,
       "departure" : "Timisoara",
       "arrival" : "Cluj",
-      "date" : "19/12/2020"
+      "date" : "19/12/2020",
+      "trainId" : "ID005",
+      "inTransit" : true
     }
   ]
   

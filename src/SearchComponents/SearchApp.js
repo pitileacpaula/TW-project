@@ -5,6 +5,7 @@ import SearchBar from './SearchBar'
 import TableBody  from './TableBody'
 
 
+
 export class SearchApp extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +15,11 @@ export class SearchApp extends Component {
       departure : '',
       arrival : '',
       date : '',
-      isLoading: true,
+      isLoading: false,
     }
+  
   }
+ 
   componentDidMount() {        fetch(`http://localhost:3000/trains`)   
    .then(response => response.json())      
    .then(data =>  {             
@@ -42,10 +45,18 @@ handleSearchEvents = (title, name) => {
   this.setState({ [name]: title });
 }
 render() {
+
+
+      
+
+
   const filteredData = this.data.filter((dataObj)=>
   (dataObj.departure.indexOf(this.state.departure) !== -1)&&
   (dataObj.arrival.indexOf(this.state.arrival) !== -1)&&
   (dataObj.date.indexOf(this.state.date ) !== -1));
+
+
+  let datta={filteredData}
     return (
       <div className="App">
         
@@ -55,10 +66,10 @@ render() {
         date={this.state.date}
         handleSearchEvents={this.handleSearchEvents}/>
         <TableBody  
-        departure= {this.state.departure}
-        arrival={this.state.arrival}
-        date={this.state.date}
+       
         data={filteredData}/>
+    
+        
       </div>
     )
   }
