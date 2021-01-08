@@ -2,6 +2,7 @@ import React from 'react'
 //import data from '../data.json'
 import db from '../db.json'
 import TextField from '@material-ui/core/TextField';
+
 class SearchArrival extends React.Component {
     state={
         search : ''

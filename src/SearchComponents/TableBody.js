@@ -23,7 +23,6 @@ function createData(departure, arrival, date) {
 
  class TableTrains extends Component {
   
-
   render() {
     let rows =[];
     this.props.data.forEach((dataObj)=> {
