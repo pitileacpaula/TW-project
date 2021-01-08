@@ -2,6 +2,16 @@ import React from 'react'
 //import data from '../data.json'
 import db from '../db.json'
 import TextField from '@material-ui/core/TextField';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import TableRows from './TableRows'
+
+
 
 
 class SearchArrival extends React.Component {
@@ -30,20 +40,38 @@ class SearchArrival extends React.Component {
             
             
         })}
+
+        let rows =[];
+        libData.forEach((dataObj)=> {
+          rows.push(
+            <TableRows key={dataObj.id}
+            departure={dataObj.departure}
+            arrival={dataObj.arrival}
+            date={dataObj.date}  
+            />
+          )
+        }) 
         return (
             
                 <div>
                   
-                  <TextField  id="filled-search" label=" Train id" type="search" variant="filled" value= { this.state.search} onChange={(e) => this.handlechange(e)} />
+                  <TextField  autoComplete="off" id="filled-search" label=" Train id" type="search" variant="filled" value= { this.state.search} onChange={(e) => this.handlechange(e)} />
+                  <TableContainer component={Paper} >
+      <Table  aria-label="simple table" >
+        <TableHead >
+          <TableRow>
+            <TableCell><b>Departure</b></TableCell>
+            <TableCell><b> Arrival</b></TableCell>
+            <TableCell><b>Date</b></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows}
+        </TableBody>
+      </Table>
+    </TableContainer>
 
-
-            <ul>
-                {
-                    libData.map((i,index) => {
-                        return <li key={index } > {i.departure } {i.arrival} {i.date} {i.trainId}</li>
-                    })
-                }
-            </ul>
+            
             </div>
         )
     }
