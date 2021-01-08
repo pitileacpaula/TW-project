@@ -20,6 +20,10 @@ function createData(departure, arrival, date) {
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 648006e89005bd981cfb8c5a16c3a4e3a79958e9
  class TableTrains extends Component {
   
   render() {
