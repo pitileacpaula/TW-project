@@ -1,6 +1,5 @@
 import React from 'react'
 //import data from '../data.json'
-import db from '../db.json'
 import TextField from '@material-ui/core/TextField';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -16,62 +15,80 @@ import TableRows from './TableRows'
 
 class SearchArrival extends React.Component {
     state={
-        search : ''
+        search : '',
+        trains: []
     }
 
-     handlechange (e) {
-             this.setState({
-                 search: e.target.value
-             })
-         }
+    handlechange (e) {
+        this.setState({
+            search: e.target.value
+        })
+    }
 
+        componentWillMount()
+        {
+            fetch('/Trains', {mode: 'no-cors'})
+                .then(response => response.json())
+                .then(data => {
+                    for (let i = 0; i < data.length; i++) {
+                        let entry = {};
+                        entry.departure = data[i].departure;
+                        entry.arrival = data[i].arrival;
+                        entry.date = data[i].date;
+                        this.state.trains[i] = entry;
+                    }
+                    this.data =this.state.trains;
+                    this.setState({
+                        trains: data
+                    });
+                })
+        }
     render()
     {
-        const trains = db.trains;
-        let libData=[];  
+        let libData=[];
         const searchKey= this.state.search.trim().toLowerCase();
 
-      
+
         if(searchKey && searchKey.length >0)
-        { libData= trains.filter( i => {
+        { libData= this.state.trains.filter( i => {
             if(i.inTransit!= false){
                 return i.trainId.toLowerCase().match(searchKey);
             }
-            
-            
+
+
         })}
 
         let rows =[];
         libData.forEach((dataObj)=> {
-          rows.push(
-            <TableRows key={dataObj.id}
-            departure={dataObj.departure}
-            arrival={dataObj.arrival}
-            date={dataObj.date}  
-            />
-          )
-        }) 
+            rows.push(
+                <TableRows key={dataObj.id}
+                           departure={dataObj.departure}
+                           arrival={dataObj.arrival}
+                           date={dataObj.date}
+                />
+            )
+        })
         return (
-            
-                <div>
-                  
-                  <TextField  autoComplete="off" id="filled-search" label=" Train id" type="search" variant="filled" value= { this.state.search} onChange={(e) => this.handlechange(e)} />
-                  <TableContainer component={Paper} >
-      <Table  aria-label="simple table" >
-        <TableHead >
-          <TableRow>
-            <TableCell><b>Departure</b></TableCell>
-            <TableCell><b> Arrival</b></TableCell>
-            <TableCell><b>Date</b></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows}
-        </TableBody>
-      </Table>
-    </TableContainer>
 
-            
+            <div>
+
+                <TextField  autoComplete="off" id="filled-search" label=" Train id" type="search" variant="filled" value= { this.state.search} onChange={(e) => this.handlechange(e)} />
+                <TableContainer component={Paper} >
+                    <Table  aria-label="simple table" >
+                        <TableHead >
+                            <TableRow>
+                                <TableCell><b>Departure</b></TableCell>
+                                <TableCell><b> Arrival</b></TableCell>
+                                <TableCell><b>Date</b></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+
             </div>
         )
     }

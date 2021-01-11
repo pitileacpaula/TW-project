@@ -34,6 +34,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import RouteLayer from "./RouteLayer";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +80,7 @@ let styles = {
   }),
 };
 //Object for showing routes *right now just as an example so I don't forget the structure*
-const geojsonObject = {
+let geojsonObject = {
                       	"type": "FeatureCollection",
                       	"features": [
                       		{
@@ -125,6 +126,8 @@ const Appp = () => {
   const [showLayer2, setShowLayer2] = useState(true);
   }
 
+
+
 //End map definitions
 
 //Default function that generates the home page
@@ -141,6 +144,7 @@ export default function ProminentAppBar() {
     const [zoom, setZoom] = useState(6.8);
     const [showLayer1, setShowLayer1] = useState(true);
     const [showLayer2, setShowLayer2] = useState(true);
+
   //Return the page
   return (
     <div className={classes.root}>
@@ -166,18 +170,18 @@ export default function ProminentAppBar() {
         </Toolbar>
       </AppBar>
       <CssBaseline />
-      
+
       <Container fixed className = {classes.container}>
 
             {/*The form that handles the search by Departure, Arrival and date*/}
             <form className = {classes.cautare}>
             <Typography component="div" style={{ backgroundColor: '#D9DBF1', top : '30px', height: '80vh', position:'relative' }}  >
                 <Typography component="h1" style={{ top:'10%', fontWeight:'bold', fontSize:'30px'}}>Search for trains </Typography>
-                
+
                 <SearchApp/>
-               
+
             </Typography>
-            
+
             </form>
             </Container>
 <Container fixed className = {classes.container}>
@@ -210,17 +214,14 @@ export default function ProminentAppBar() {
                       source={osm()}
                       zIndex={0}
                     />
-                    <VectorLayer
-                     source={vector({ features: new GeoJSON().readFeatures(geojsonObject, { featureProjection: get('EPSG:3857') }) })}
-                     style={styles.MultiLineString}
-                    />
+                      <RouteLayer id={2}/>
                   </Layers>
                   <Controls>
                     <FullScreenControl />
                   </Controls>
                 </Map>
                 </Typography>
-        
+
       </Container>
     </div>
   );

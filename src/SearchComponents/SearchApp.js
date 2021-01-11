@@ -19,14 +19,14 @@ export class SearchApp extends Component {
   
   }
  
-  componentDidMount() {        fetch(`http://localhost:3000/trains`)   
+  componentDidMount() {        fetch(`/Trains`, {mode:'no-cors'})
    .then(response => response.json())      
    .then(data =>  {             
      let array = []; 
         
      for (let i = 0; i < data.length; i++) {             
       let entry = {};      
-      entry.departure = data[i].departure;          
+      entry.departure = data[i].departure;
       entry.arrival = data[i].arrival; 
       entry.date=data[i].date ;        
       
@@ -34,7 +34,7 @@ export class SearchApp extends Component {
      } 
      this.data = array;       
      this.setState({          
-       isLoading: false,
+       isLoading: false, array :data
      });      
    })    
    .catch(error => this.setState({ error, isLoading: false }));  
@@ -55,7 +55,7 @@ render() {
   (dataObj.date.indexOf(this.state.date ) !== -1));
 
 
-  let datta={filteredData}
+  let data={filteredData}
     return (
       <div className="App">
         
